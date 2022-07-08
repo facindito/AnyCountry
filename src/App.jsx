@@ -1,33 +1,36 @@
-import { useEffect, useState } from 'react'
-import getAllCountry from './services/getAllCountry'
+import { useState, useCallback } from 'react'
+import Countries from './components/Countries'
+import useCountries from './hooks/useCountries'
+
 function App() {
-  const [countries, setCountries] = useState()
+  const [value, setValue] = useState('')
 
-  useEffect(() => {
-    getAllCountry().then(({ data }) => {
-      setCountries(data)
-    })
-  }, [])
+  const { countries, loading } = useCountries()
 
-  console.log(countries)
+  const handleChange = e => {
+    setValue(e.target.value)
+  }
+
+  const filtreCountry = useCallback(() => {
+    const showCountries = countries
+    if (value.trim() !== '') {
+      return showCountries.filter(country => country.name.common.toUpperCase().includes(value.toUpperCase()))
+    }
+    return showCountries
+  }, [countries, value])
+
   return (
     <div className='min-h-screen bg-gray-600 text-white overflow-hidden'>
-      {countries && (
-        <div className='border-2 p-4 m-4'>
-          <ul className='flex flex-col gap-4'>
-            {countries.map(({ name, flags }) => {
-              return (
-                <li key={name.common} className='flex items-center gap-4'>
-                  <div className='w-16'>
-                    <img src={flags.svg} alt={name.common} />
-                  </div>
-                  <span>{name.common}</span>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      )}
+      <div className='p-4 m-4'>
+        <input
+          value={value || ''}
+          type='text'
+          placeholder='Search...'
+          className='rounded p-2 text-black'
+          onChange={handleChange}
+        />
+      </div>
+      {loading ? <h1>Loading...</h1> : <Countries countries={filtreCountry()} />}
     </div>
   )
 }
