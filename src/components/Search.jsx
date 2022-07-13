@@ -9,7 +9,7 @@ export default function Search({ value, setValue }) {
         value={value || ''}
         type='text'
         placeholder='Search...'
-        className='rounded p-2 text-black'
+        className='rounded p-2 text-black border-2 border-slate-400'
         onChange={handleChange}
       />
     </div>

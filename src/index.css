@@ -20,8 +20,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-color: #333;
-  color: #fff;
+  background-color: #f3f3f3;
+  color: #5d6060;
 }
 img,
 picture,
