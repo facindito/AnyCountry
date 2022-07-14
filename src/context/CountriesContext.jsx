@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import useCountries from '../hooks/useCountries'
 const Context = React.createContext({})
 
 export function CountriesContextProvider({ children }) {
-  const [countries, setCountries] = useState([])
+  const { countries, setCountries } = useCountries()
+
   return <Context.Provider value={{ countries, setCountries }}>{children}</Context.Provider>
 }
 

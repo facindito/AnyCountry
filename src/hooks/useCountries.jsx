@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import getAllCountry from '../services/getAllCountry'
-import CountriesContext from '../context/CountriesContext'
 
 export default function useCountries() {
-  const { countries, setCountries } = useContext(CountriesContext)
+  const [countries, setCountries] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   useEffect(() => {
