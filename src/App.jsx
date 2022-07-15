@@ -8,6 +8,7 @@ function App() {
     <CountriesContextProvider>
       <Routes>
         <Route path='/' element={<Home />} />
+
         <Route path='country/:name' element={<InfoCountry />} />
       </Routes>
     </CountriesContextProvider>

@@ -40,6 +40,12 @@ export default function InfoCountry() {
                       {country.subregion}
                     </p>
                   )}
+                  {country.continents && (
+                    <p>
+                      <strong>Continents: </strong>
+                      {country.continents.map(continent => continent)}
+                    </p>
+                  )}
                 </div>
                 <div>
                   {country.population && (
