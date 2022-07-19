@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import useCountry from '../hooks/useCountry'
 import CountriesContext from '../context/CountriesContext'
+import Skeleton from './Skeleton'
 
 export default function InfoCountry() {
   const { name } = useParams()
@@ -11,9 +12,11 @@ export default function InfoCountry() {
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <div className=' py-6'>
+          <Skeleton />
+        </div>
       ) : (
-        <div className=' p-6 min-h-screen'>
+        <div className=' py-6'>
           <div className='bg-slate-300 overflow-hidden rounded-lg flex flex-col items-center md:flex-row'>
             <div className='p-8'>
               <img className='max-h-[25rem] w-full' src={country.flags.svg} alt={name} />

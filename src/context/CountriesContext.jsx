@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import useCountries from '../hooks/useCountries'
 const Context = React.createContext({})
 

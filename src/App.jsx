@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
-import InfoCountry from './components/InfoCountry'
 import { CountriesContextProvider } from './context/CountriesContext'
+import Details from './pages/Details'
 import Home from './pages/home'
 
 function App() {
@@ -8,8 +8,7 @@ function App() {
     <CountriesContextProvider>
       <Routes>
         <Route path='/' element={<Home />} />
-
-        <Route path='country/:name' element={<InfoCountry />} />
+        <Route path='country/:name' element={<Details />} />
       </Routes>
     </CountriesContextProvider>
   )

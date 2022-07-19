@@ -5,6 +5,7 @@ export default function useCountries() {
   const [countries, setCountries] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+
   useEffect(() => {
     try {
       setLoading(true)

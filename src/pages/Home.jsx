@@ -1,42 +1,44 @@
-import { useState, useCallback } from 'react'
-import useCountries from '../hooks/useCountries'
+import { useState, useCallback, useContext } from 'react'
 import Header from '../components/Header'
 import Countries from '../components/Countries'
 import Pagination from '../components/Pagination'
 import Filters from '../components/Filters'
+import CountriesContext from '../context/CountriesContext'
+import Skeleton from '../components/Skeleton'
 
 export default function Home() {
-  const [value, setValue] = useState('')
-  const [filter, setFilter] = useState('')
+  const [keyword, setKeyword] = useState('')
+  const [filters, setFilters] = useState('')
   const [page, setPage] = useState(1)
 
-  const { countries, isLoading } = useCountries()
+  const { countries, isLoading } = useContext(CountriesContext)
 
+  // const
   const countryPerPage = 12
   const indexOfLastCountry = page * countryPerPage
   const indexOfFirstCountry = indexOfLastCountry - countryPerPage
 
   const filtreCountry = useCallback(() => {
-    if (value.trim() !== '') {
-      return countries.filter(country => country.name.common.toUpperCase().includes(value.toUpperCase()))
+    if (keyword.trim() !== '') {
+      return countries.filter(country => country.name.common.toUpperCase().includes(keyword.toUpperCase()))
     }
-    if (filter.trim() !== '') {
-      return countries.filter(country => country.continents[0].toUpperCase().includes(filter.toUpperCase()))
+    if (filters.trim() !== '') {
+      return countries.filter(country => country.continents[0].toUpperCase().includes(filters.toUpperCase()))
     }
     return countries.slice(indexOfFirstCountry, indexOfLastCountry)
-  }, [countries, value, page, filter])
+  }, [countries, keyword, page, filters])
 
   return (
     <div className='relative'>
-      <Header value={value} setValue={setValue} />
+      <Header keyword={keyword} setKeyword={setKeyword} />
       <main className='container mx-auto p-6'>
         {isLoading ? (
           <h1>Loading...</h1>
         ) : (
           <>
-            <Filters setFilter={setFilter} />
+            <Filters setFilter={setFilters} />
             <Countries countries={filtreCountry()} />
-            {!value && !filter && (
+            {!keyword && !filters && (
               <Pagination countries={countries.length} itemPerPage={countryPerPage} setPage={setPage} page={page} />
             )}
           </>

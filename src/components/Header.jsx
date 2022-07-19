@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 
-export default function Header({ value, setValue }) {
+export default function Header({ keyword, setKeyword }) {
   const handleChange = e => {
-    setValue(e.target.value)
+    setKeyword(e.target.value)
   }
   return (
     <header className='backdrop-blur-sm bg-slate-300/30 sticky top-0 p-4'>
@@ -17,7 +17,7 @@ export default function Header({ value, setValue }) {
 
         <div className=''>
           <input
-            value={value || ''}
+            value={keyword || ''}
             type='text'
             placeholder='Search...'
             className='max-w-60 w-full py-2 pl-2 rounded text-black border-2 border-slate-400'
