@@ -3,9 +3,26 @@ import useCountries from '../hooks/useCountries'
 const Context = React.createContext({})
 
 export function CountriesContextProvider({ children }) {
-  const { countries, setCountries } = useCountries()
+  const { countries, isLoading, countriesFilters, changeKeyword, keyword, changeFilters, changePage, filters, page } =
+    useCountries()
 
-  return <Context.Provider value={{ countries, setCountries }}>{children}</Context.Provider>
+  return (
+    <Context.Provider
+      value={{
+        countries,
+        isLoading,
+        countriesFilters,
+        changeKeyword,
+        keyword,
+        changeFilters,
+        changePage,
+        filters,
+        page,
+      }}
+    >
+      {children}
+    </Context.Provider>
+  )
 }
 
 export default Context

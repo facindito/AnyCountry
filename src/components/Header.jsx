@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 
-export default function Header({ keyword, setKeyword }) {
+export default function Header({ keyword, changeKeyword }) {
   const handleChange = e => {
-    setKeyword(e.target.value)
+    changeKeyword({ keyword: e.target.value })
   }
   return (
     <header className='backdrop-blur-sm bg-slate-300/30 sticky top-0 p-4'>

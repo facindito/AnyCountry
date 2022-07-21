@@ -1,8 +1,7 @@
-export default function Filters({ setFilter }) {
+export default function Filters({ changeFilters }) {
   const handleChange = e => {
     e.preventDefault()
-    setFilter(e.target.value)
-    console.log(e.target.value)
+    changeFilters({ filters: e.target.value })
   }
 
   return (

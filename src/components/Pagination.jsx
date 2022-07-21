@@ -1,12 +1,12 @@
-export default function Pagination({ countries, itemPerPage, setPage, page }) {
-  const pageNumber = Math.ceil(countries / itemPerPage)
+export default function Pagination({ countries, changePage, page }) {
+  const pageNumber = Math.ceil(countries / 12)
 
   return (
     <div className='flex justify-center space-x-1'>
       <button
         title='previous'
         type='button'
-        onClick={() => setPage(prev => (prev > 1 ? prev - 1 : prev))}
+        onClick={() => changePage({ page: page > 1 ? page - 1 : page })}
         className='inline-flex items-center justify-center w-8 h-8 py-0 bg-slate-300 rounded-md border-2 border-transparent hover:border-yellow '
       >
         <img src='./img/previousPage.svg' alt='left' />
@@ -21,7 +21,7 @@ export default function Pagination({ countries, itemPerPage, setPage, page }) {
       <button
         title='next'
         type='button'
-        onClick={() => setPage(prev => (prev < pageNumber ? prev + 1 : prev))}
+        onClick={() => changePage({ page: page < pageNumber ? page + 1 : page })}
         className='inline-flex items-center justify-center w-8 h-8 py-0 bg-slate-300 rounded-md border-2 border-transparent hover:border-yellow'
       >
         <img src='./img/nextPage.svg' alt='rigth' />
