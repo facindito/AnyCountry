@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import useCountry from '../hooks/useCountry'
 import CountriesContext from '../context/CountriesContext'
 import Skeleton from './Skeleton'
@@ -19,7 +19,7 @@ export default function InfoCountry() {
         <div className=' py-6'>
           <div className='bg-slate-300 overflow-hidden rounded-lg flex flex-col items-center md:flex-row'>
             <div className='p-8'>
-              <img className='max-h-[25rem] w-full' src={country.flags.svg} alt={name} />
+              <img className='max-h-[25rem] w-full' src={country.flag} alt={name} />
             </div>
             <div className='p-8 w-full md:w-auto'>
               <h1 className='font-bold text-2xl mb-4'>{name}</h1>
@@ -83,9 +83,14 @@ export default function InfoCountry() {
                       country.borders.map(border => {
                         const findCountry = countries.find(cont => cont.cca3 === border)
                         return (
-                          <div key={border} className='bg-white bg-opacity-50 p-2 rounded-lg'>
-                            <span>{findCountry.name.common}</span>
-                          </div>
+                          <Link
+                            key={border}
+                            to={`/country/${findCountry.name}`}
+                            className='bg-white bg-opacity-50 p-2 rounded-lg flex items-center gap-2 border-2 border-transparent hover:border-yellow '
+                          >
+                            <img src={findCountry.flag} alt={findCountry.name} className='w-6' />
+                            <span>{findCountry.name}</span>
+                          </Link>
                         )
                       })}
                   </div>

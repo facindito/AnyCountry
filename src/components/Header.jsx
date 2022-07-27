@@ -15,7 +15,7 @@ export default function Header({ keyword, changeKeyword }) {
           <strong className='text-3xl'>Country</strong>
         </div>
 
-        <div className=''>
+        <div>
           <input
             value={keyword || ''}
             type='text'

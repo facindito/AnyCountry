@@ -14,7 +14,9 @@ const ACTIONS_REDUCERS = {
     keyword: action.payload,
     countriesFilters:
       action.payload.trim() !== ''
-        ? state.countries.filter(country => country.name.common.toUpperCase().includes(action.payload.toUpperCase()))
+        ? state.countries.filter(country =>
+            country.name.toUpperCase().includes(action.payload.toUpperCase())
+          )
         : state.countries.slice(0, countryPerPage),
   }),
   [ACTIONS.CHANGE_FILTER]: (state, action) => ({
@@ -22,7 +24,9 @@ const ACTIONS_REDUCERS = {
     filters: action.payload,
     countriesFilters:
       action.payload.trim() !== ''
-        ? state.countries.filter(country => country.continents[0].toUpperCase().includes(action.payload.toUpperCase()))
+        ? state.countries.filter(country =>
+            country.continents[0].toUpperCase().includes(action.payload.toUpperCase())
+          )
         : state.countries.slice(0, countryPerPage),
   }),
   [ACTIONS.CHANGE_PAGE]: (state, action) => ({
@@ -46,8 +50,6 @@ const reducer = (state, action) => {
 }
 
 export default function useFilterCountries() {
-  // const { countries } = useContext(CountriesContext)
-
   const [{ keyword, filters, page, countriesFilters }, dispatch] = useReducer(reducer, {
     keyword: '',
     filters: '',
@@ -56,12 +58,12 @@ export default function useFilterCountries() {
     countriesFilters: [],
   })
 
-  console.log(countriesFilters)
   return {
     changeKeyword: ({ keyword }) => dispatch({ type: ACTIONS.CHANGE_KEYWORD, payload: keyword }),
     changeFilters: ({ filters }) => dispatch({ type: ACTIONS.CHANGE_FILTER, payload: filters }),
     changePage: ({ page }) => dispatch({ type: ACTIONS.CHANGE_PAGE, payload: page }),
-    chargeCountries: ({ countries }) => dispatch({ type: ACTIONS.CHARGE_COUNTRIES, payload: countries }),
+    chargeCountries: ({ countries }) =>
+      dispatch({ type: ACTIONS.CHARGE_COUNTRIES, payload: countries }),
     keyword,
     filters,
     page,

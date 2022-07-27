@@ -9,15 +9,23 @@ import useFilterCountries from '../reducer/useFilterCountries'
 export default function Home() {
   const { countries, isLoading } = useContext(CountriesContext)
 
-  const { chargeCountries, countriesFilters, changeKeyword, keyword, changeFilters, changePage, filters, page } =
-    useFilterCountries()
+  const {
+    keyword,
+    filters,
+    page,
+    countriesFilters,
+    chargeCountries,
+    changeKeyword,
+    changeFilters,
+    changePage,
+  } = useFilterCountries()
 
   useEffect(() => {
     chargeCountries({ countries })
   }, [countries])
 
   return (
-    <div className='relative'>
+    <>
       <Header keyword={keyword} changeKeyword={changeKeyword} />
       <main className='container mx-auto p-6'>
         {isLoading ? (
@@ -32,6 +40,6 @@ export default function Home() {
           </>
         )}
       </main>
-    </div>
+    </>
   )
 }

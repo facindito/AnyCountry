@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import getCountriesMapper from '../mapper/getCountries'
 import getAllCountry from '../services/getAllCountry'
 
 export default function useCountries() {
@@ -11,7 +12,7 @@ export default function useCountries() {
       setLoading(true)
       setError(false)
       getAllCountry().then(({ data }) => {
-        const countries = data.sort((a, b) => (a.name.common > b.name.common ? 1 : -1))
+        const { countries } = getCountriesMapper({ data })
         setCountries(countries)
         setLoading(false)
       })
