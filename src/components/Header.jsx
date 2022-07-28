@@ -1,8 +1,11 @@
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import CountriesContext from '../context/CountriesContext'
 
-export default function Header({ keyword, changeKeyword }) {
+function Header() {
+  const { keyword, setKeyword } = useContext(CountriesContext)
   const handleChange = e => {
-    changeKeyword({ keyword: e.target.value })
+    setKeyword(e.target.value)
   }
   return (
     <header className='backdrop-blur-sm bg-slate-300/30 sticky top-0 p-4'>
@@ -28,3 +31,5 @@ export default function Header({ keyword, changeKeyword }) {
     </header>
   )
 }
+
+export default React.memo(Header)

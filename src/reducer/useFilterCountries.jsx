@@ -1,5 +1,4 @@
 import { useReducer } from 'react'
-const countryPerPage = 12
 
 const ACTIONS = {
   CHANGE_KEYWORD: 'change_keyword',
@@ -12,35 +11,14 @@ const ACTIONS_REDUCERS = {
   [ACTIONS.CHANGE_KEYWORD]: (state, action) => ({
     ...state,
     keyword: action.payload,
-    countriesFilters:
-      action.payload.trim() !== ''
-        ? state.countries.filter(country =>
-            country.name.toUpperCase().includes(action.payload.toUpperCase())
-          )
-        : state.countries.slice(0, countryPerPage),
   }),
   [ACTIONS.CHANGE_FILTER]: (state, action) => ({
     ...state,
     filters: action.payload,
-    countriesFilters:
-      action.payload.trim() !== ''
-        ? state.countries.filter(country =>
-            country.continents[0].toUpperCase().includes(action.payload.toUpperCase())
-          )
-        : state.countries.slice(0, countryPerPage),
   }),
   [ACTIONS.CHANGE_PAGE]: (state, action) => ({
     ...state,
     page: action.payload,
-    countriesFilters: state.countries.slice(
-      action.payload * countryPerPage - countryPerPage,
-      action.payload * countryPerPage
-    ),
-  }),
-  [ACTIONS.CHARGE_COUNTRIES]: (state, action) => ({
-    ...state,
-    countries: action.payload,
-    countriesFilters: action.payload.slice(0, countryPerPage),
   }),
 }
 
@@ -50,23 +28,18 @@ const reducer = (state, action) => {
 }
 
 export default function useFilterCountries() {
-  const [{ keyword, filters, page, countriesFilters }, dispatch] = useReducer(reducer, {
+  const [{ keyword, filters, page }, dispatch] = useReducer(reducer, {
     keyword: '',
     filters: '',
     page: 1,
-    countries: [],
-    countriesFilters: [],
   })
 
   return {
     changeKeyword: ({ keyword }) => dispatch({ type: ACTIONS.CHANGE_KEYWORD, payload: keyword }),
     changeFilters: ({ filters }) => dispatch({ type: ACTIONS.CHANGE_FILTER, payload: filters }),
     changePage: ({ page }) => dispatch({ type: ACTIONS.CHANGE_PAGE, payload: page }),
-    chargeCountries: ({ countries }) =>
-      dispatch({ type: ACTIONS.CHARGE_COUNTRIES, payload: countries }),
     keyword,
     filters,
     page,
-    countriesFilters,
   }
 }

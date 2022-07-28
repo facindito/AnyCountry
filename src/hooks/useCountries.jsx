@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import CountriesContext from '../context/CountriesContext'
 import getCountriesMapper from '../mapper/getCountries'
 import getAllCountry from '../services/getAllCountry'
 
 export default function useCountries() {
-  const [countries, setCountries] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const { countries, setCountries } = useContext(CountriesContext)
 
   useEffect(() => {
     try {

@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import useCountries from '../hooks/useCountries'
 const Context = React.createContext({})
 
 export function CountriesContextProvider({ children }) {
-  const { countries, isLoading } = useCountries()
+  const [countries, setCountries] = useState([])
+  const [keyword, setKeyword] = useState('')
 
-  return <Context.Provider value={{ countries, isLoading }}>{children}</Context.Provider>
+  return (
+    <Context.Provider value={{ countries, setCountries, keyword, setKeyword }}>
+      {children}
+    </Context.Provider>
+  )
 }
 
 export default Context

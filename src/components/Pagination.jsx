@@ -10,7 +10,7 @@ export default function Pagination({ countries, changePage, page }) {
           page !== 1 && 'hover:border-yellow'
         } `}
         disabled={page === 1 && 'disabled'}
-        onClick={() => changePage({ page: page - 1 })}
+        onClick={() => changePage(prevState => ({ ...prevState, page: page - 1 }))}
       >
         <img src='./img/previousPage.svg' alt='left' />
       </button>
@@ -28,7 +28,7 @@ export default function Pagination({ countries, changePage, page }) {
           page !== pageNumber && 'hover:border-yellow'
         } `}
         disabled={page === pageNumber && 'disabled'}
-        onClick={() => changePage({ page: page + 1 })}
+        onClick={() => changePage(prevState => ({ ...prevState, page: page + 1 }))}
       >
         <img src='./img/nextPage.svg' alt='rigth' />
       </button>

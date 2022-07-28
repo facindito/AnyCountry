@@ -1,7 +1,7 @@
 export default function Filters({ changeFilters }) {
   const handleChange = e => {
     e.preventDefault()
-    changeFilters({ filters: e.target.value })
+    changeFilters(e.target.value)
   }
 
   return (
