@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
 import CountriesContext from '../context/CountriesContext'
-import getCountriesMapper from '../mapper/getCountries'
 import getAllCountry from '../services/getAllCountry'
 
 export default function useCountries() {
@@ -12,8 +11,7 @@ export default function useCountries() {
     try {
       setLoading(true)
       setError(false)
-      getAllCountry().then(({ data }) => {
-        const { countries } = getCountriesMapper({ data })
+      getAllCountry().then(({ countries }) => {
         setCountries(countries)
         setLoading(false)
       })

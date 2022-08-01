@@ -1,6 +1,6 @@
 import { useState, useCallback, useContext } from 'react'
 import Countries from '../components/Countries'
-import Filters from '../components/Filters'
+import NavBar from '../components/NavBar'
 import Pagination from '../components/Pagination'
 import useCountries from '../hooks/useCountries'
 import CountriesContext from '../context/CountriesContext'
@@ -33,7 +33,7 @@ export default function Results() {
         <h1>Loading...</h1>
       ) : (
         <>
-          <Filters changeFilters={setContinent} />
+          <NavBar changeFilters={setContinent} />
           <Countries countries={filtreCountry()} />
           {!keyword && !continent && (
             <Pagination countries={filtreCountry().length} changePage={setPage} page={page} />

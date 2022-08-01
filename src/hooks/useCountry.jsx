@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import getCountryMapper from '../mapper/getCountry'
 import getCountry from '../services/getCountry'
 
 export default function useCountry({ name }) {
@@ -12,8 +11,7 @@ export default function useCountry({ name }) {
       setLoading(true)
       setError(false)
       getCountry({ name }).then(({ data }) => {
-        const country = getCountryMapper({ data })
-        setCountry(country)
+        setCountry(data)
         setLoading(false)
       })
     } catch (err) {
