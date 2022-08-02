@@ -1,15 +1,13 @@
-import React, { useContext } from 'react'
-import CountriesContext from '../context/CountriesContext'
+import React from 'react'
 
-export default function NavBar({ changeFilters }) {
-  const { keyword, setKeyword } = useContext(CountriesContext)
+export default function NavBar({ changeRegion, keyword, changeKeyword }) {
   const handleChangeKeyword = e => {
-    setKeyword(e.target.value)
+    changeKeyword({ keyword: e.target.value })
   }
 
   const handleChangeContinent = e => {
     e.preventDefault()
-    changeFilters(e.target.value)
+    changeRegion({ region: e.target.value })
   }
   return (
     <div className='container mx-auto py-6'>
@@ -23,8 +21,8 @@ export default function NavBar({ changeFilters }) {
         />
 
         <select
-          name='continents'
-          id='continents'
+          name='region'
+          id='region'
           className='p-2 bg-slate-300 rounded-lg text-gray border-2 border-transparent focus:border-yellow'
           onChange={handleChangeContinent}
           defaultValue=''

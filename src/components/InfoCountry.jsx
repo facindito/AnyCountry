@@ -1,12 +1,9 @@
-import { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import useCountry from '../hooks/useCountry'
-import CountriesContext from '../context/CountriesContext'
 import Skeleton from './Skeleton'
 
 export default function InfoCountry() {
   const { name } = useParams()
-  const { countries } = useContext(CountriesContext)
   const { country, isLoading } = useCountry({ name })
 
   return (
@@ -75,23 +72,22 @@ export default function InfoCountry() {
                   )}
                 </div>
               </div>
-              {country.borders && countries.length !== 0 && (
+              {country.borders && (
                 <div className='mt-4'>
                   <strong>Border Countries: </strong>
                   <div className='flex flex-wrap gap-4 mt-4'>
-                    {country.borders &&
-                      country.borders.map(border => {
-                        return (
-                          <Link
-                            key={border.name}
-                            to={`/country/${border.name}`}
-                            className='bg-white bg-opacity-50 p-2 rounded-lg flex items-center gap-2 border-2 border-transparent hover:border-yellow '
-                          >
-                            <img src={border.flag} alt={border.name} className='w-6' />
-                            <span>{border.name}</span>
-                          </Link>
-                        )
-                      })}
+                    {country.borders.map(border => {
+                      return (
+                        <Link
+                          key={border.name}
+                          to={`/country/${border.name}`}
+                          className='bg-white bg-opacity-50 p-2 rounded-lg flex items-center gap-2 border-2 border-transparent hover:border-yellow '
+                        >
+                          <img src={border.flag} alt={border.name} className='w-6' />
+                          <span>{border.name}</span>
+                        </Link>
+                      )
+                    })}
                   </div>
                 </div>
               )}

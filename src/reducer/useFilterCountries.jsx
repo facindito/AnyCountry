@@ -2,7 +2,7 @@ import { useReducer } from 'react'
 
 const ACTIONS = {
   CHANGE_KEYWORD: 'change_keyword',
-  CHANGE_FILTER: 'change_filter',
+  CHANGE_REGION: 'change_region',
   CHANGE_PAGE: 'change_page',
   CHARGE_COUNTRIES: 'charge_countries',
 }
@@ -11,10 +11,12 @@ const ACTIONS_REDUCERS = {
   [ACTIONS.CHANGE_KEYWORD]: (state, action) => ({
     ...state,
     keyword: action.payload,
+    page: 1,
   }),
   [ACTIONS.CHANGE_FILTER]: (state, action) => ({
     ...state,
-    filters: action.payload,
+    region: action.payload,
+    page: 1,
   }),
   [ACTIONS.CHANGE_PAGE]: (state, action) => ({
     ...state,
@@ -28,18 +30,18 @@ const reducer = (state, action) => {
 }
 
 export default function useFilterCountries() {
-  const [{ keyword, filters, page }, dispatch] = useReducer(reducer, {
+  const [{ keyword, region, page }, dispatch] = useReducer(reducer, {
     keyword: '',
-    filters: '',
+    region: '',
     page: 1,
   })
 
   return {
     changeKeyword: ({ keyword }) => dispatch({ type: ACTIONS.CHANGE_KEYWORD, payload: keyword }),
-    changeFilters: ({ filters }) => dispatch({ type: ACTIONS.CHANGE_FILTER, payload: filters }),
+    changeRegion: ({ region }) => dispatch({ type: ACTIONS.CHANGE_FILTER, payload: region }),
     changePage: ({ page }) => dispatch({ type: ACTIONS.CHANGE_PAGE, payload: page }),
     keyword,
-    filters,
+    region,
     page,
   }
 }

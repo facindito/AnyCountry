@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from 'react'
 import CountriesContext from '../context/CountriesContext'
 import getAllCountry from '../services/getAllCountry'
 
-export default function useCountries() {
+export default function useCountries({ keyword, region } = { keyword: null, region: null }) {
+  const [filterCountries, setFilterContries] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const { countries, setCountries } = useContext(CountriesContext)
@@ -13,6 +14,7 @@ export default function useCountries() {
       setError(false)
       getAllCountry().then(({ countries }) => {
         setCountries(countries)
+        setFilterContries(countries)
         setLoading(false)
       })
     } catch (err) {
@@ -21,8 +23,17 @@ export default function useCountries() {
       setError(err)
     }
   }, [])
+
+  useEffect(() => {
+    setFilterContries(countries.filter(country => country.continents[0].toLowerCase().includes(region.toLowerCase())))
+  }, [region])
+
+  useEffect(() => {
+    setFilterContries(countries.filter(country => country.name.toLowerCase().includes(keyword.toLowerCase())))
+  }, [keyword])
+
   return {
-    countries,
+    countries: filterCountries,
     isLoading,
     error,
   }
