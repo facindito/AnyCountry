@@ -9,9 +9,11 @@ export default function Home() {
   const { countries, isLoading } = useCountries({ region, keyword })
 
   return (
-    <main className='container mx-auto p-6'>
+    <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <div className='container mx-auto'>
+          <h1>Loading...</h1>
+        </div>
       ) : (
         <>
           <NavBar changeRegion={changeRegion} keyword={keyword} changeKeyword={changeKeyword} />
@@ -19,6 +21,6 @@ export default function Home() {
           <Pagination countries={countries.length} changePage={changePage} page={page} />
         </>
       )}
-    </main>
+    </>
   )
 }
