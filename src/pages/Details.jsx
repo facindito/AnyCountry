@@ -1,5 +1,6 @@
 import InfoCountry from '../components/InfoCountry'
 import { useNavigate } from 'react-router-dom'
+
 export default function Details() {
   const navigate = useNavigate()
   return (

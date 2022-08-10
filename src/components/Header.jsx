@@ -11,7 +11,7 @@ export default function Header({ darkMode, setDarkMode }) {
           <div className='flex gap-2 items-center mb-4 sm:mb-0'>
             <strong className='text-3xl'>Any</strong>
             <Link to={'/'}>
-              <img src='./img/world.svg' alt='World' className='w-8' />
+              <img src='../img/world.svg' alt='World' className='w-8' />
             </Link>
             <strong className='text-3xl'>Country</strong>
           </div>

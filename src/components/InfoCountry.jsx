@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import useCountry from '../hooks/useCountry'
 import Skeleton from './Skeleton'
+import { Helmet } from 'react-helmet'
 
 export default function InfoCountry() {
   const { name } = useParams()
@@ -14,6 +15,10 @@ export default function InfoCountry() {
         </div>
       ) : (
         <div className='py-6 dark:text-white'>
+          <Helmet>
+            <link rel='shortcut icon' href={country.flag} type='image/x-icon' />
+            <title>{name}</title>
+          </Helmet>
           <div className='bg-slate-300 dark:bg-gray-light overflow-hidden rounded-lg flex flex-col items-center lg:flex-row'>
             <div className='p-8'>
               <img className='max-h-[25rem] w-full' src={country.flag} alt={name} />
